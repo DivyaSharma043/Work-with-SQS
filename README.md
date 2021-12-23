@@ -52,3 +52,21 @@
             e.printStackTrace();
         }
 ```
+### Sending messages synchronously
+```java
+// Create the nontransacted session with AUTO_ACKNOWLEDGE mode
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+        // Create a queue identity and specify the queue name to the session
+        Queue queue = session.createQueue("MyStandardQueue");
+
+        // Create a producer for the 'MyStandardQueue'
+        MessageProducer producer = session.createProducer(queue);
+
+        // Create the text message
+        TextMessage message = session.createTextMessage("Standard Queue Working");
+
+        // Send the message
+        producer.send(message);
+        System.out.println("JMS Message " + message.getJMSMessageID());
+```
