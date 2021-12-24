@@ -18,7 +18,7 @@
 			<artifactId>amazon-sqs-java-messaging-lib</artifactId>
 			<version>1.0.8</version>
 			<type>jar</type>
-		</dependency>
+  </dependency>
 ```
 ## Create Connection with AWS
 
@@ -70,3 +70,26 @@
         producer.send(message);
         System.out.println("JMS Message " + message.getJMSMessageID());
 ```
+
+### Receiving messages synchronously
+```java
+ // Create a consumer for the 'MyStandardQueue'
+        MessageConsumer consumer = session.createConsumer(queue);
+        // Start receiving incoming messages
+        connection.start();
+
+        // Receive a message from 'MyStandardQueue' and wait up to 1 second
+        Message receivedMessage = consumer.receive(1000);
+
+        // Cast the received message as TextMessage and display the text
+        if (receivedMessage != null) {
+            System.out.println("Received: " + ((TextMessage) receivedMessage).getText());
+        }
+```
+### cLose the connection
+```java
+        // Close the connection (and the session).
+        connection.close();
+	System.out.println("Connection closed");
+```
+
