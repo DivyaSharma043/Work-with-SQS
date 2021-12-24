@@ -23,13 +23,13 @@
 ## Create Connection with AWS
 
 ```java
-// Create a new connection factory with all defaults (credentials and region) set automatically
+	// Create a new connection factory with all defaults (credentials and region) set automatically
         SQSConnectionFactory connectionFactory = new SQSConnectionFactory(
                 new ProviderConfiguration(),
                 AmazonSQSClientBuilder.defaultClient()
         );
 
-// Create the connection.
+	// Create the connection.
         SQSConnection connection = null;
         try {
             connection = connectionFactory.createConnection();
@@ -43,7 +43,7 @@
 # Create Standard Queue
 
 ```java
-// Create an SQS queue named MyStandardQueue, if it doesn't already exist
+	// Create an SQS queue named MyStandardQueue, if it doesn't already exist
         try {
             if (!client.queueExists("MyStandardQueue")) {
                 client.createQueue("MyStandardQueue");
@@ -54,7 +54,7 @@
 ```
 ### Sending messages synchronously
 ```java
-// Create the nontransacted session with AUTO_ACKNOWLEDGE mode
+	// Create the nontransacted session with AUTO_ACKNOWLEDGE mode
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         // Create a queue identity and specify the queue name to the session
@@ -73,7 +73,7 @@
 
 ### Receiving messages synchronously
 ```java
- // Create a consumer for the 'MyStandardQueue'
+ 	// Create a consumer for the 'MyStandardQueue'
         MessageConsumer consumer = session.createConsumer(queue);
         // Start receiving incoming messages
         connection.start();
