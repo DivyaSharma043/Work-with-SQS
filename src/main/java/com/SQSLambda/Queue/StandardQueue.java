@@ -69,5 +69,6 @@ public class StandardQueue {
         // Close the connection (and the session).
         connection.close();
         System.out.println("Connection closed");
+
     }
 }
