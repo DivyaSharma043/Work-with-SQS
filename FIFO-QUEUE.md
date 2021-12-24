@@ -31,6 +31,7 @@
             client.createQueue(new CreateQueueRequest().withQueueName("MyFIFOQueue.fifo").withAttributes(attributes));
         }
 ```
+
 ## Sending messages synchronously
 ```java
         // Create the nontransacted session with AUTO_ACKNOWLEDGE mode
