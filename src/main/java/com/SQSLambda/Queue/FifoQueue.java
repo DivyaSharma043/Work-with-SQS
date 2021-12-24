@@ -60,12 +60,12 @@ public class FifoQueue {
         System.out.println("JMS Message " + message.getJMSMessageID());
         System.out.println("JMS Message Sequence Number " + message.getStringProperty("JMS_SQS_SequenceNumber"));
 
-        // Create a consumer for the 'MyQueue'
+        // Create a consumer for the 'MyFIFOQueue'
         MessageConsumer consumer = session.createConsumer(queue);
         // Start receiving incoming messages
         connection.start();
 
-        // Receive a message from 'MyQueue' and wait up to 1 second
+        // Receive a message from 'MyFIFOQueue' and wait up to 1 second
         Message receivedMessage = consumer.receive(1000);
 
         // Cast the received message as TextMessage and display the text
