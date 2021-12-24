@@ -5,7 +5,6 @@ import com.amazon.sqs.javamessaging.ProviderConfiguration;
 import com.amazon.sqs.javamessaging.SQSConnection;
 import com.amazon.sqs.javamessaging.SQSConnectionFactory;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-
 import javax.jms.*;
 
 public class StandardQueue {
@@ -53,5 +52,22 @@ public class StandardQueue {
         // Send the message
         producer.send(message);
         System.out.println("JMS Message " + message.getJMSMessageID());
+
+        // Create a consumer for the 'MyStandardQueue'
+        MessageConsumer consumer = session.createConsumer(queue);
+        // Start receiving incoming messages
+        connection.start();
+
+        // Receive a message from 'MyStandardQueue' and wait up to 1 second
+        Message receivedMessage = consumer.receive(1000);
+
+        // Cast the received message as TextMessage and display the text
+        if (receivedMessage != null) {
+            System.out.println("Received: " + ((TextMessage) receivedMessage).getText());
+        }
+
+        // Close the connection (and the session).
+        connection.close();
+        System.out.println("Connection closed");
     }
 }
